@@ -6,6 +6,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 {
     string gameVersion = "1";
 
+    public GameObject progressLabel;
+    public GameObject controlPanel;
+
     void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -13,11 +16,13 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        Connect();
+
     }
 
     public void Connect()
     {
+        progressLabel.SetActive(true);
+        controlPanel.SetActive(false);
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.JoinRandomRoom();
@@ -29,23 +34,25 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
+        Debug.Log("Connected to Master");
         PhotonNetwork.JoinRandomRoom();
     }
     
     public override void OnDisconnected(DisconnectCause cause)
     {
+        progressLabel.SetActive(false);
+        controlPanel.SetActive(true);
         Debug.LogWarningFormat($"PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {cause}");
     }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+        Debug.Log("Failed to Connect to Room | Creating Room");
         PhotonNetwork.CreateRoom(null, new RoomOptions());
     }
     
     public override void OnJoinedRoom()
     {
-        Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+        Debug.Log("Joined Room");
     }
 }
