@@ -9,6 +9,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public GameObject progressLabel;
     public GameObject controlPanel;
 
+    private bool isConnecting = false;
+
     void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -23,19 +25,25 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         progressLabel.SetActive(true);
         controlPanel.SetActive(false);
+        
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.JoinRandomRoom();
         }else{
-            PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = gameVersion;
+            isConnecting = PhotonNetwork.ConnectUsingSettings();
         }
     }
 
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to Master");
-        PhotonNetwork.JoinRandomRoom();
+
+        if(isConnecting)
+        {
+            PhotonNetwork.JoinRandomRoom();
+            isConnecting = false;
+        }
     }
     
     public override void OnDisconnected(DisconnectCause cause)
@@ -53,6 +61,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     
     public override void OnJoinedRoom()
     {
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            Debug.Log("Loading Room");
+            PhotonNetwork.LoadLevel("Arena_1");
+        }
         Debug.Log("Joined Room");
     }
 }

@@ -10,6 +10,29 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    public override void OnPlayerEnteredRoom(Player other)
+    {
+        Debug.LogFormat($"Player entered room {other.NickName}");
+    
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.LogFormat($"Master Client: {PhotonNetwork.IsMasterClient}");
+            LoadArena();
+        }
+    }
+
+    
+    public override void OnPlayerLeftRoom(Player other)
+    {
+        Debug.LogFormat($"Player Left: {other.NickName}");
+    
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.LogFormat($"Master Client Left: {PhotonNetwork.IsMasterClient}");
+            LoadArena();
+        }
+    }
+
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);
