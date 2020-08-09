@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : MonoBehaviourPun, IPunObservable
 {
     [Header("Movement")]
     public float defaultSpeed = 1.0f;
@@ -10,17 +11,24 @@ public class PlayerControl : MonoBehaviour
     public float maxEnergy = 100.0f;
     public float energyRegain = 1f;
     public float energyDepletion = 2f;
+
     [Header("Shooting")]
-    public GameObject projectilePrefab;
+    public string projectilePrefabName;
     public Transform projectileLocation;
     public float projectileSpeed;
     public float shootDelay = 0.0f;
+
     [Header("Health")]
     public float maxHealth = 100.0f;
     private float currentHealth;
 
+    [Header("Others")]
+
     private Rigidbody2D rb;
     private Rigidbody2D projectileRb;
+    private CameraFollow camF;
+    private GameManager gm;
+
     private float currentShootTime = 0.0f;
     private float currentEnergy;
     private float currentSpeed;
@@ -28,13 +36,35 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        camF = GetComponent<CameraFollow>();
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
         currentSpeed = defaultSpeed;
+
+        if (camF != null)
+        {
+            if (photonView.IsMine) camF.OnStartFollowing();
+        }else{
+            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraFollow Component on playerPrefab.");
+        }
+
+        if(!photonView.IsMine)
+        {
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }else{
+            if(gm != null)
+            {
+                Debug.Log("GameManager is not null .................... SUCCESS");
+                photonView.RPC("IncrementPlayerCount", RpcTarget.All);
+            }
+        }
     }
 
     void Update()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
+
         float hAxis = Input.GetAxis("Horizontal");
         float vAxis = Input.GetAxis("Vertical");
         
@@ -60,7 +90,18 @@ public class PlayerControl : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
         FaceMouse();
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentHealth);
+        }else{
+            this.currentHealth = (float)stream.ReceiveNext();
+        }
     }
 
     public void ChangeHealth(float amount)
@@ -79,8 +120,14 @@ public class PlayerControl : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject projectile = Instantiate(projectilePrefab, projectileLocation.position, projectileLocation.rotation);
+        GameObject projectile = PhotonNetwork.Instantiate($"Prefabs/{projectilePrefabName}", projectileLocation.position, projectileLocation.rotation);
         Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
         projectileRb.AddForce(projectileLocation.up * projectileSpeed, ForceMode2D.Impulse);
+    }
+
+    [PunRPC]
+    private void IncrementPlayerCount()
+    {
+        gm.Increment();
     }
 }

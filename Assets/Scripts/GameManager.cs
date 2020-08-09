@@ -10,6 +10,22 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    public string[] georges;
+
+    [HideInInspector]
+    public int playerCount = 0;
+
+    void Awake()
+    {
+        Debug.Log("yay (la poggere)");
+    }
+
+    void Start()
+    {
+        Debug.Log($"We are Instantiating LocalPlayer from {Application.loadedLevelName}");
+        PhotonNetwork.Instantiate($"Prefabs/Players/{georges[playerCount]}", Vector3.zero, Quaternion.identity, 0);
+    }
+
     public override void OnPlayerEnteredRoom(Player other)
     {
         Debug.LogFormat($"Player entered room {other.NickName}");
@@ -17,10 +33,18 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.LogFormat($"Master Client: {PhotonNetwork.IsMasterClient}");
-            LoadArena();
         }
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(playerCount);
+        }else{
+            this.playerCount = (int)stream.ReceiveNext();
+        }
+    }
     
     public override void OnPlayerLeftRoom(Player other)
     {
@@ -50,5 +74,12 @@ public class GameManager : MonoBehaviourPunCallbacks
             Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
         }
         PhotonNetwork.LoadLevel("Arena_1");
+    }
+
+    public void Increment()
+    {
+        Debug.Log("PLAYER COUNT INCRMENTED .................... SUCCESS");
+        playerCount += 1;
+        Debug.Log(playerCount);
     }
 }
