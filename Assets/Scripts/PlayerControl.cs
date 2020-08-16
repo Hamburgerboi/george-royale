@@ -53,11 +53,7 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
         }else{
-            if(gm != null)
-            {
-                Debug.Log("GameManager is not null .................... SUCCESS");
-                photonView.RPC("IncrementPlayerCount", RpcTarget.All);
-            }
+
         }
     }
 
@@ -120,14 +116,11 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
 
     private void Shoot()
     {
-        GameObject projectile = PhotonNetwork.Instantiate($"Prefabs/{projectilePrefabName}", projectileLocation.position, projectileLocation.rotation);
-        Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
-        projectileRb.AddForce(projectileLocation.up * projectileSpeed, ForceMode2D.Impulse);
-    }
-
-    [PunRPC]
-    private void IncrementPlayerCount()
-    {
-        gm.Increment();
+        if(projectilePrefabName != "" && projectileLocation != null)
+        {
+            GameObject projectile = PhotonNetwork.Instantiate($"Prefabs/{projectilePrefabName}", projectileLocation.position, projectileLocation.rotation);
+            Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
+            projectileRb.AddForce(projectileLocation.up * projectileSpeed, ForceMode2D.Impulse);
+        }
     }
 }

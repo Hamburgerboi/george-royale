@@ -36,6 +36,12 @@ ScriptsOnlyBuild:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.Editor.dll:
     - TMPro.EditorUtilities.TMPro_FontAssetCreatorWindow
+    Unity.TextMeshPro.dll:
+    - TMPro.TMP_FontAsset
+    - TMPro.TMP_Settings
+    - TMPro.TMP_SpriteAsset
+    - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -94,6 +100,10 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14058}
     - Class: 114
+      Script: {instanceID: 14096}
+    - Class: 114
+      Script: {instanceID: 14454}
+    - Class: 114
       Script: {instanceID: 14562}
     - Class: 114
       Script: {instanceID: 15228}
@@ -128,6 +138,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
     - Class: 50
       Script: {instanceID: 0}
     - Class: 58
@@ -143,6 +155,8 @@ ScriptsOnlyBuild:
     - Class: 95
       Script: {instanceID: 0}
     - Class: 104
+      Script: {instanceID: 0}
+    - Class: 109
       Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 11754}
@@ -167,6 +181,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12896}
     - Class: 114
+      Script: {instanceID: 12954}
+    - Class: 114
       Script: {instanceID: 13316}
     - Class: 114
       Script: {instanceID: 13502}
@@ -179,7 +195,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14058}
     - Class: 114
+      Script: {instanceID: 14096}
+    - Class: 114
+      Script: {instanceID: 14116}
+    - Class: 114
       Script: {instanceID: 14562}
+    - Class: 114
+      Script: {instanceID: 14866}
     - Class: 114
       Script: {instanceID: 15096}
     - Class: 114
@@ -709,7 +731,7 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: 7888d93d40ef61fb9aab225ee93a2de9
+      Hash: e07a309edac3f231e80f0a01b825521a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager

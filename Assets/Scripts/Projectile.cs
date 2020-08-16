@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviourPun
 {
     public float destroyTime = 1.0f;
     public bool speedDecay = false;
@@ -31,7 +31,10 @@ public class Projectile : MonoBehaviour
         
         if(destroyTime <= 0)
         {
-            PhotonNetwork.Destroy(gameObject);
+            if(photonView.IsMine)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
     }
 
@@ -44,7 +47,11 @@ public class Projectile : MonoBehaviour
         {
             dmg.Damage(damage);
         }
-        PhotonNetwork.Destroy(gameObject);
+
+        if(photonView.IsMine)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
     private void DecaySpeed()

@@ -3,6 +3,7 @@ using System.Collections;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 using Photon.Pun;
 using Photon.Realtime;
@@ -10,51 +11,65 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    [Header("Countdown")]
+    public TextMeshProUGUI countdownText;
+    public float countdownTime = 15.0f;
+    
     public string[] georges;
+    public Transform[] spawnPoints;
 
-    [HideInInspector]
-    public int playerCount = 0;
+    private int count = 0;
+    private bool isCountdown = false;
+    private float countdownTimer;
+    private GameObject thisPlayer;
 
     void Awake()
     {
-        Debug.Log("yay (la poggere)");
+        countdownTimer = countdownTime;
+        countdownText.enabled = false;
     }
 
     void Start()
     {
-        Debug.Log($"We are Instantiating LocalPlayer from {Application.loadedLevelName}");
-        PhotonNetwork.Instantiate($"Prefabs/Players/{georges[playerCount]}", Vector3.zero, Quaternion.identity, 0);
+        thisPlayer = PhotonNetwork.Instantiate("Prefabs/Players/George", Vector3.zero, Quaternion.identity, 0);
+
+        if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        {
+            isCountdown = true;
+            countdownText.enabled = true;
+        }
+    }
+
+    void Update()
+    {
+        if(isCountdown)
+        {
+            countdownTimer -= Time.deltaTime;
+            countdownText.text = $"{(int)countdownTimer}";
+            if(countdownTimer <= 0)
+            {
+                SpawnPlayers();
+                Debug.Log("TIMER DONE");
+                isCountdown = false;
+                countdownText.enabled = false;
+            }
+        }
     }
 
     public override void OnPlayerEnteredRoom(Player other)
     {
-        Debug.LogFormat($"Player entered room {other.NickName}");
-    
-        if (PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogFormat($"Master Client: {PhotonNetwork.IsMasterClient}");
-        }
-    }
+        count += 1;
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
+        if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
-            stream.SendNext(playerCount);
-        }else{
-            this.playerCount = (int)stream.ReceiveNext();
+            isCountdown = true;
+            countdownText.enabled = true;
         }
     }
     
     public override void OnPlayerLeftRoom(Player other)
-    {
-        Debug.LogFormat($"Player Left: {other.NickName}");
-    
-        if (PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogFormat($"Master Client Left: {PhotonNetwork.IsMasterClient}");
-            LoadArena();
-        }
+    {   
+        count -= 1;
     }
 
     public override void OnLeftRoom()
@@ -76,10 +91,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("Arena_1");
     }
 
-    public void Increment()
+    private void SpawnPlayers()
     {
-        Debug.Log("PLAYER COUNT INCRMENTED .................... SUCCESS");
-        playerCount += 1;
-        Debug.Log(playerCount);
+        PhotonNetwork.Destroy(thisPlayer);
+        PhotonNetwork.Instantiate($"Prefabs/Players/{georges[count]}", Vector3.zero, Quaternion.identity, 0);
     }
 }
