@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public bool followOnStart = true; // Delete this later
-
     private Transform cameraTransform;
     private bool isFollowing;
 
 	void Start()
 	{
-		if (followOnStart)
-		{
-			OnStartFollowing();
-		}
+
 	}
 
 	void Update()

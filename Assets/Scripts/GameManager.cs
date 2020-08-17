@@ -31,9 +31,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        thisPlayer = PhotonNetwork.Instantiate("Prefabs/Players/George", Vector3.zero, Quaternion.identity, 0);
+        thisPlayer = PhotonNetwork.Instantiate("Prefabs/Players/George", spawnPoints[0].position, Quaternion.identity, 0);
 
-        if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        if(PhotonNetwork.CurrentRoom.PlayerCount == 2 && !isCountdown)
         {
             isCountdown = true;
             countdownText.enabled = true;
@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             if(countdownTimer <= 0)
             {
                 SpawnPlayers();
-                Debug.Log("TIMER DONE");
                 isCountdown = false;
                 countdownText.enabled = false;
             }
@@ -58,9 +57,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player other)
     {
-        count += 1;
+        count ++;
 
-        if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        if(PhotonNetwork.CurrentRoom.PlayerCount == 2 && !isCountdown)
         {
             isCountdown = true;
             countdownText.enabled = true;
@@ -69,7 +68,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     
     public override void OnPlayerLeftRoom(Player other)
     {   
-        count -= 1;
+        count --;
     }
 
     public override void OnLeftRoom()
@@ -94,6 +93,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void SpawnPlayers()
     {
         PhotonNetwork.Destroy(thisPlayer);
-        PhotonNetwork.Instantiate($"Prefabs/Players/{georges[count]}", Vector3.zero, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate($"Prefabs/Players/{georges[count]}", spawnPoints[count + 1].position, Quaternion.identity, 0);
     }
 }
