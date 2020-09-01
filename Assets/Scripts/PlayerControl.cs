@@ -97,12 +97,7 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(currentHealth);
-        }else{
-            this.currentHealth = (float)stream.ReceiveNext();
-        }
+
     }
 
     public void ChangeHealth(float amount)
@@ -133,19 +128,18 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
     {
         if(photonView.IsMine)
         {
+            gm.InvokeRespawn(respawnTime);
             PhotonNetwork.Destroy(gameObject);
-            Invoke("Respawn", respawnTime);
         }
-    }
-
-    private void Respawn()
-    {
-        int count = gm.count;
-        PhotonNetwork.Instantiate($"Prefabs/Players/{gm.georges[count]}", gm.spawnPoints[count + 1].position, Quaternion.identity, 0);
     }
 }
 
 
 /*
-
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentHealth);
+        }else{
+            this.currentHealth = (float)stream.ReceiveNext();
+        }
 */

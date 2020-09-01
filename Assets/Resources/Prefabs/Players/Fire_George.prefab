@@ -201,6 +201,7 @@ MonoBehaviour:
   projectileSpeed: 11
   shootDelay: 0.16
   maxHealth: 100
+  respawnTime: 5
 --- !u!114 &3795649593146708959
 MonoBehaviour:
   m_ObjectHideFlags: 0

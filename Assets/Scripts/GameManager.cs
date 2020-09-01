@@ -14,14 +14,26 @@ public class GameManager : MonoBehaviourPunCallbacks
     [Header("Countdown")]
     public TextMeshProUGUI countdownText;
     public float countdownTime = 15.0f;
+
+    private bool isCountdown = false;
+    private float countdownTimer;
     
+    [Header("Respawn")]
+    public TextMeshProUGUI respawnText;
+
+    [Header("Spawning")]
     public string[] georges;
     public Transform[] spawnPoints;
 
+    [Header("Others")]
+    public bool inGame = false;
     [HideInInspector] public int count = 0;
-    private bool isCountdown = false;
-    private float countdownTimer;
+
+
     private GameObject thisPlayer;
+
+    private float respawnTimer;
+    private bool respawning;
 
     void Awake()
     {
@@ -32,6 +44,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     void Start()
     {
         thisPlayer = PhotonNetwork.Instantiate("Prefabs/Players/George", spawnPoints[0].position + GenerateRandomVector3(12f), Quaternion.identity, 0);
+        respawnText.enabled = false;
 
         if(PhotonNetwork.CurrentRoom.PlayerCount == 2 && !isCountdown)
         {
@@ -49,10 +62,21 @@ public class GameManager : MonoBehaviourPunCallbacks
             if(countdownTimer <= 0)
             {
                 SpawnPlayers();
+                inGame = true;
                 isCountdown = false;
                 countdownText.enabled = false;
                 PhotonNetwork.CurrentRoom.IsOpen = false;
             }
+        }
+
+        if(respawnTimer > 0 && respawning)
+        {
+            respawnTimer -= Time.deltaTime;
+            respawnText.text = $"Respawning in: {respawnTimer.ToString("F1")}";
+        }else if(respawning){
+            InstantiatePlayers();
+            respawning = false;
+            respawnText.enabled = false;
         }
     }
 
@@ -69,7 +93,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     
     public override void OnPlayerLeftRoom(Player other)
     {   
-        count --;
+        if(!inGame) count --;
     }
 
     public override void OnLeftRoom()
@@ -82,6 +106,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
+    public void InvokeRespawn(float delay)
+    {
+        respawnText.enabled = true;
+        respawnTimer = delay;
+        respawning = true;
+    }
+
     private void LoadArena()
     {
         if (!PhotonNetwork.IsMasterClient)
@@ -91,10 +122,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("Arena_1");
     }
 
+    private void InstantiatePlayers()
+    {
+        PhotonNetwork.Instantiate($"Prefabs/Players/{georges[count]}", spawnPoints[count + 1].position, Quaternion.identity, 0);
+    }
+
     private void SpawnPlayers()
     {
         PhotonNetwork.Destroy(thisPlayer);
-        PhotonNetwork.Instantiate($"Prefabs/Players/{georges[count]}", spawnPoints[count + 1].position, Quaternion.identity, 0);
+        InstantiatePlayers();
     }
 
     private Vector3 GenerateRandomVector3(float multiplier)

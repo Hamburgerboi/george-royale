@@ -51,7 +51,8 @@ public class Projectile : MonoBehaviourPun
 
         if(photonView.IsMine)
         {
-            Invoke("InvokedDestroy", 0.05f);
+            GetComponent<Renderer>().enabled = false;
+            Invoke("InvokedDestroy", 0.3f);
         }
     }
 
