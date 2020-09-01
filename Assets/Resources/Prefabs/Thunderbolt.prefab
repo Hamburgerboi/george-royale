@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8658365217113629070}
   - component: {fileID: 2357018694074575827}
   - component: {fileID: 1671959934819002377}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Thunderbolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}

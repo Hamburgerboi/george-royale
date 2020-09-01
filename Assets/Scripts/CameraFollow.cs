@@ -27,6 +27,6 @@ public class CameraFollow : MonoBehaviour
 
 	void Follow()
 	{	
-		cameraTransform.position = this.transform.position - new Vector3(0, 0, 10);
+		cameraTransform.position = this.transform.position - new Vector3(0, 0, 100);
 	}
 }

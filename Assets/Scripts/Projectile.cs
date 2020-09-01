@@ -45,12 +45,13 @@ public class Projectile : MonoBehaviourPun
         Damageable dmg = col.GetComponent<Damageable>();
         if (dmg != null && (col.GetComponent<ElementType>().type != gameObject.GetComponent<ElementType>().type))
         {
+            Debug.Log("HIT");
             dmg.Damage(damage);
         }
 
         if(photonView.IsMine)
         {
-            PhotonNetwork.Destroy(gameObject);
+            Invoke("InvokedDestroy", 0.05f);
         }
     }
 
@@ -65,5 +66,10 @@ public class Projectile : MonoBehaviourPun
     private void IncreaseSpeed()
     {
         rb.velocity += rb.velocity.normalized / new Vector2(3f, 3f);
+    }
+
+    private void InvokedDestroy()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }

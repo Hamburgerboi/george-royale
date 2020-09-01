@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7444733525966374188}
   - component: {fileID: -4047431878750469946}
   - component: {fileID: -8430336580635755333}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rock_Shard
   m_TagString: Untagged
   m_Icon: {fileID: 0}

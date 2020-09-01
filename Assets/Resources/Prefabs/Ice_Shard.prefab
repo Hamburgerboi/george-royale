@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7359867272119387893}
   - component: {fileID: -7264950872495519475}
   - component: {fileID: 5717401251490319090}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ice_Shard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,10 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daca90e67aa7e40aa8bd6a41915d2b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: 1.8
+  destroyTime: 100.8
   speedDecay: 0
   speedIncrease: 0
-  damage: 2
+  damage: 100
 --- !u!68 &1166308562388210688
 EdgeCollider2D:
   m_ObjectHideFlags: 0

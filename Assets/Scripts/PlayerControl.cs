@@ -23,6 +23,7 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
     private float currentHealth;
 
     [Header("Others")]
+    public float respawnTime = 5.0f;
 
     private Rigidbody2D rb;
     private Rigidbody2D projectileRb;
@@ -42,6 +43,8 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
         currentEnergy = maxEnergy;
         currentSpeed = defaultSpeed;
 
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+
         if (camF != null)
         {
             if (photonView.IsMine) camF.OnStartFollowing();
@@ -60,6 +63,8 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
     void Update()
     {
         if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
+
+        if(currentHealth == 0) Death();
 
         float hAxis = Input.GetAxis("Horizontal");
         float vAxis = Input.GetAxis("Vertical");
@@ -123,4 +128,24 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
             projectileRb.AddForce(projectileLocation.up * projectileSpeed, ForceMode2D.Impulse);
         }
     }
+
+    private void Death()
+    {
+        if(photonView.IsMine)
+        {
+            PhotonNetwork.Destroy(gameObject);
+            Invoke("Respawn", respawnTime);
+        }
+    }
+
+    private void Respawn()
+    {
+        int count = gm.count;
+        PhotonNetwork.Instantiate($"Prefabs/Players/{gm.georges[count]}", gm.spawnPoints[count + 1].position, Quaternion.identity, 0);
+    }
 }
+
+
+/*
+
+*/

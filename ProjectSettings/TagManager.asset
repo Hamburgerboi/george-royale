@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Arena
+  - Projectiles
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 4159050619
+    locked: 0
+  - name: Midground
+    uniqueID: 2931807079
+    locked: 0
+  - name: Foreground
+    uniqueID: 41296175
     locked: 0

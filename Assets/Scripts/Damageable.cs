@@ -10,17 +10,17 @@ public class Damageable : MonoBehaviour
     {
         pc = GetComponent<PlayerControl>();
     }
-
-    void Update()
-    {
-        
-    }
     
     public void Damage(float damage)
     {
         if(pc != null)
         {
             pc.ChangeHealth(damage);
+            Debug.Log("AAAAA");
+            Debug.Log("AAAAA");
+            Debug.Log("AAAAA");
+            Debug.Log("AAAAA");
+            Debug.Log("AAAAA");
         }
     }
 }

@@ -20,6 +20,7 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
+    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -74,7 +75,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 58
+      Script: {instanceID: 0}
+    - Class: 60
+      Script: {instanceID: 0}
     - Class: 61
+      Script: {instanceID: 0}
+    - Class: 66
       Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
@@ -142,6 +151,8 @@ ScriptsOnlyBuild:
     - Class: 50
       Script: {instanceID: 0}
     - Class: 58
+      Script: {instanceID: 0}
+    - Class: 61
       Script: {instanceID: 0}
     - Class: 68
       Script: {instanceID: 0}
@@ -250,7 +261,7 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
-      Hash: 66be064d44113262303b35eff227c227
+      Hash: 13698dedcee9af66d6d2ab7e8068c899
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerControl
@@ -730,7 +741,7 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: e07a309edac3f231e80f0a01b825521a
+      Hash: f481731ba14c581fccc73a4be7d91b0e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -990,4 +1001,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Lobby.unity
   - Assets/Scenes/Arena_1.unity
-  playerPath: /Users/vincentqi/Desktop/George_Royale_Alpha1-3.app
+  playerPath: /Users/vincentqi/Desktop/George_Royale_Alpha1-4.app

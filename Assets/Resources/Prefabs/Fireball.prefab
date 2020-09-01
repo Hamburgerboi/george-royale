@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8948772103914947364}
   - component: {fileID: 2817565658986727841}
   - component: {fileID: 8239242367844938268}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   destroyTime: 0.8
   speedDecay: 1
   speedIncrease: 0
-  damage: 1
+  damage: 100
 --- !u!114 &8948772103914947364
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public string[] georges;
     public Transform[] spawnPoints;
 
-    private int count = 0;
+    [HideInInspector] public int count = 0;
     private bool isCountdown = false;
     private float countdownTimer;
     private GameObject thisPlayer;
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        thisPlayer = PhotonNetwork.Instantiate("Prefabs/Players/George", spawnPoints[0].position, Quaternion.identity, 0);
+        thisPlayer = PhotonNetwork.Instantiate("Prefabs/Players/George", spawnPoints[0].position + GenerateRandomVector3(12f), Quaternion.identity, 0);
 
         if(PhotonNetwork.CurrentRoom.PlayerCount == 2 && !isCountdown)
         {
@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 SpawnPlayers();
                 isCountdown = false;
                 countdownText.enabled = false;
+                PhotonNetwork.CurrentRoom.IsOpen = false;
             }
         }
     }
@@ -94,5 +95,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.Destroy(thisPlayer);
         PhotonNetwork.Instantiate($"Prefabs/Players/{georges[count]}", spawnPoints[count + 1].position, Quaternion.identity, 0);
+    }
+
+    private Vector3 GenerateRandomVector3(float multiplier)
+    {
+        return new Vector3(UnityEngine.Random.value * multiplier, UnityEngine.Random.value * multiplier, 0);
     }
 }
