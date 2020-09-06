@@ -180,6 +180,9 @@ MonoBehaviour:
   projectileSpeed: 19
   shootDelay: 0.8
   maxHealth: 100
+  respawnTime: 5
+  towerAlive: 0
+  type: Rock
 --- !u!114 &5143014516212292995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b0acb38d83547d1b5aad5e79c09632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followOnStart: 1
 --- !u!114 &5143014516212292733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +239,6 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 5143014516212292994}
   - {fileID: -6098472196898828519}
   viewIdField: 0
   InstantiationId: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerControl : MonoBehaviourPun, IPunObservable
+public class PlayerControl : MonoBehaviourPun
 {
     [Header("Movement")]
     public float defaultSpeed = 1.0f;
@@ -22,8 +22,12 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
     public float maxHealth = 100.0f;
     private float currentHealth;
 
-    [Header("Others")]
+    [Header("Respawn")]
     public float respawnTime = 5.0f;
+    public bool towerAlive;
+
+    [Header("Others")]
+    public string type;
 
     private Rigidbody2D rb;
     private Rigidbody2D projectileRb;
@@ -33,15 +37,22 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
     private float currentShootTime = 0.0f;
     private float currentEnergy;
     private float currentSpeed;
+    private GameObject tower;
 
     void Start()
     {
+        // Components
         rb = GetComponent<Rigidbody2D>();
         camF = GetComponent<CameraFollow>();
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
+        // Variables
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
         currentSpeed = defaultSpeed;
+
+        // GameObjects
+        tower = GameObject.Find($"{type}_Tower");
 
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
@@ -55,8 +66,6 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
         if(!photonView.IsMine)
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
-        }else{
-
         }
     }
 
@@ -95,11 +104,6 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
         FaceMouse();
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-
-    }
-
     public void ChangeHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth - amount, 0f, maxHealth);
@@ -128,8 +132,17 @@ public class PlayerControl : MonoBehaviourPun, IPunObservable
     {
         if(photonView.IsMine)
         {
-            gm.InvokeRespawn(respawnTime);
-            PhotonNetwork.Destroy(gameObject);
+            towerAlive = !(tower == null);
+            if(towerAlive) {
+                gm.InvokeRespawn(respawnTime);
+                PhotonNetwork.Destroy(gameObject);
+            }else{
+                Debug.Log("DEAD");
+                Debug.Log("DEAD");
+                Debug.Log("DEAD");
+                Debug.Log("DEAD");
+                Debug.Log("DEAD");
+            }
         }
     }
 }

@@ -111,6 +111,8 @@ MonoBehaviour:
   shootDelay: 0
   maxHealth: 100
   respawnTime: 5
+  towerAlive: 0
+  type: None
 --- !u!114 &8762347303067885600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +144,6 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 5195485214176468520}
   - {fileID: 887155447091468580}
   viewIdField: 0
   InstantiationId: 0

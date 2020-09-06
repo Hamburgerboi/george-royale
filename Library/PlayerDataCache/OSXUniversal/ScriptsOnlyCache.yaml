@@ -9,8 +9,10 @@ ScriptsOnlyBuild:
     - PlayerControl
     - PlayerNameInputField
     - Projectile
+    - Tower
+    PhotonUnityNetworking.Editor.dll:
+    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
-    - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonTransformView
     - Photon.Pun.PhotonView
     - Photon.Pun.ServerSettings
@@ -18,6 +20,7 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
+    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -95,11 +98,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11776}
     - Class: 114
+      Script: {instanceID: 11874}
+    - Class: 114
       Script: {instanceID: 12110}
     - Class: 114
       Script: {instanceID: 12166}
     - Class: 114
+      Script: {instanceID: 12582}
+    - Class: 114
       Script: {instanceID: 12918}
+    - Class: 114
+      Script: {instanceID: 13524}
     - Class: 114
       Script: {instanceID: 13728}
     - Class: 114
@@ -111,7 +120,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14584}
     - Class: 114
+      Script: {instanceID: 15118}
+    - Class: 114
       Script: {instanceID: 15250}
+    - Class: 114
+      Script: {instanceID: 16496}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -173,8 +186,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11874}
     - Class: 114
       Script: {instanceID: 11926}
-    - Class: 114
-      Script: {instanceID: 12056}
     - Class: 114
       Script: {instanceID: 12110}
     - Class: 114
@@ -258,7 +269,7 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
-      Hash: 13698dedcee9af66d6d2ab7e8068c899
+      Hash: ca08a5cd0ed2f013045fb948af171cd2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerControl
@@ -994,6 +1005,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 827607f63b1422424c088ce35889011a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Tower
   platform: 2
   scenePathNames:
   - Assets/Scenes/Lobby.unity

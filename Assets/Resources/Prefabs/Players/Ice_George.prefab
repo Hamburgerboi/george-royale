@@ -181,6 +181,8 @@ MonoBehaviour:
   shootDelay: 0.4
   maxHealth: 100
   respawnTime: 5
+  towerAlive: 0
+  type: Ice
 --- !u!114 &5302929706216638696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +239,6 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 5302929706216638697}
   - {fileID: 6530545336362025457}
   viewIdField: 0
   InstantiationId: 0
