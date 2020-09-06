@@ -132,11 +132,12 @@ public class PlayerControl : MonoBehaviourPun
     {
         if(photonView.IsMine)
         {
-            towerAlive = !(tower == null);
+            towerAlive = tower != null;
             if(towerAlive) {
                 gm.InvokeRespawn(respawnTime);
                 PhotonNetwork.Destroy(gameObject);
             }else{
+                PhotonNetwork.Destroy(gameObject);
                 Debug.Log("DEAD");
                 Debug.Log("DEAD");
                 Debug.Log("DEAD");

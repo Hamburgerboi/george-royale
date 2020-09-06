@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    [Header("Health")]
     public float TowerHealth = 1000f;
     private float currentTowerHealth;
+
+    [Header("Animations")]
+    public float shakeDuration = 1.0f;
+
+    private float currentShakeTime = 0f;
 
     void Start()
     {
@@ -14,11 +20,18 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
+        if(currentShakeTime > 0)
+        {
+            Vector3 pos = Random.insideUnitCircle * 5;
+            transform.position += pos;
+            currentShakeTime -= Time.deltaTime;
+        }
     }
 
     public void Damage(float amount)
     {
         currentTowerHealth = Mathf.Clamp(currentTowerHealth - amount, 0f, TowerHealth);
+        currentShakeTime = shakeDuration;
         Debug.Log(currentTowerHealth);
         if(currentTowerHealth <= 0)
         {

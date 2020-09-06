@@ -1007,7 +1007,7 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 827607f63b1422424c088ce35889011a
+      Hash: 6c57791e12e58ee02ac60f3a0d05e25e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tower
