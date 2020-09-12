@@ -722,6 +722,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerHealth: 1000
+  shakeDuration: 0.05
+  shakeMultiplier: 0.15
 --- !u!114 &730518736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2459,6 +2461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerHealth: 1000
+  shakeDuration: 0.05
+  shakeMultiplier: 0.15
 --- !u!114 &1611676034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3435,6 +3439,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerHealth: 1000
+  shakeDuration: 0.05
+  shakeMultiplier: 0.15
 --- !u!114 &2020150442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4398,6 +4404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerHealth: 1000
+  shakeDuration: 0.05
+  shakeMultiplier: 0.15
 --- !u!114 &2103620247
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -108,23 +108,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12918}
     - Class: 114
-      Script: {instanceID: 13524}
+      Script: {instanceID: 13450}
     - Class: 114
-      Script: {instanceID: 13728}
+      Script: {instanceID: 13526}
     - Class: 114
-      Script: {instanceID: 14080}
+      Script: {instanceID: 13730}
     - Class: 114
-      Script: {instanceID: 14118}
+      Script: {instanceID: 14082}
     - Class: 114
-      Script: {instanceID: 14476}
+      Script: {instanceID: 14120}
     - Class: 114
-      Script: {instanceID: 14584}
+      Script: {instanceID: 14478}
     - Class: 114
-      Script: {instanceID: 15118}
+      Script: {instanceID: 14586}
     - Class: 114
-      Script: {instanceID: 15250}
+      Script: {instanceID: 15120}
     - Class: 114
-      Script: {instanceID: 16496}
+      Script: {instanceID: 15252}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -203,27 +203,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13338}
     - Class: 114
-      Script: {instanceID: 13524}
+      Script: {instanceID: 13526}
     - Class: 114
-      Script: {instanceID: 13728}
+      Script: {instanceID: 13730}
     - Class: 114
-      Script: {instanceID: 13818}
+      Script: {instanceID: 13820}
     - Class: 114
-      Script: {instanceID: 14060}
+      Script: {instanceID: 14062}
     - Class: 114
-      Script: {instanceID: 14080}
+      Script: {instanceID: 14082}
     - Class: 114
-      Script: {instanceID: 14118}
+      Script: {instanceID: 14120}
     - Class: 114
-      Script: {instanceID: 14138}
+      Script: {instanceID: 14140}
     - Class: 114
-      Script: {instanceID: 14584}
+      Script: {instanceID: 14586}
     - Class: 114
-      Script: {instanceID: 14888}
+      Script: {instanceID: 14890}
     - Class: 114
-      Script: {instanceID: 15118}
+      Script: {instanceID: 15120}
     - Class: 114
-      Script: {instanceID: 15250}
+      Script: {instanceID: 15252}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -659,6 +659,12 @@ ScriptsOnlyBuild:
     className: SpriteSkinEntity
   - hash:
       serializedVersion: 2
+      Hash: 92d2bc2e4e842a890dbfa2056e793a99
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Tower
+  - hash:
+      serializedVersion: 2
       Hash: 11df54cb47bd74c537f3c732a94ea97d
     assemblyName: PhotonRealtime.dll
     namespaceName: Photon.Realtime
@@ -1005,14 +1011,8 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 6c57791e12e58ee02ac60f3a0d05e25e
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Tower
   platform: 2
   scenePathNames:
   - Assets/Scenes/Lobby.unity
   - Assets/Scenes/Arena_1.unity
-  playerPath: /Users/vincentqi/Desktop/George_Royale_Alpha1-4.app
+  playerPath: /Users/vincentqi/Desktop/George_Royale_Alpha1-5.app
