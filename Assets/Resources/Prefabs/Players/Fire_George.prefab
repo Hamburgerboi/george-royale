@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3795649591685635957}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Projectile Location
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -49,7 +49,8 @@ GameObject:
   - component: {fileID: 3795649593146708945}
   - component: {fileID: 3795649593146708947}
   - component: {fileID: 3795649593146708944}
-  m_Layer: 0
+  - component: {fileID: 2371737834020224721}
+  m_Layer: 10
   m_Name: Fire_George
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -156,7 +157,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.0061489344, y: 0.11683953}
   serializedVersion: 2
-  m_Radius: 0.9025595
+  m_Radius: 0.9
 --- !u!50 &3795649593146708957
 Rigidbody2D:
   serializedVersion: 4
@@ -278,3 +279,18 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
+--- !u!114 &2371737834020224721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795649593146708953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ecfa445a1d54ec98b017f98b150c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speProjectileName: Phoenix
+  speRechargeTime: 90
+  SPEProjectileLocation: []

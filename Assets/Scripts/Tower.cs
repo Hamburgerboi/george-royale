@@ -26,6 +26,7 @@ public class Tower : MonoBehaviourPun
     void Update()
     {
         frameCount++;
+        
         if(currentShakeTime > 0)
         {
             Vector3 pos = Random.insideUnitCircle * shakeMultiplier;
@@ -43,7 +44,7 @@ public class Tower : MonoBehaviourPun
     {
         currentTowerHealth = Mathf.Clamp(currentTowerHealth - amount, 0f, TowerHealth);
         currentShakeTime = shakeDuration;
-        Debug.Log(currentTowerHealth);
+
         if(currentTowerHealth <= 0)
         {
             DestoryTower();

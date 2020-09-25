@@ -40,8 +40,7 @@ public class Projectile : MonoBehaviourPun
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.GetComponent<Projectile>() != null) return;
-
+        if(col.gameObject.layer == 9) return;
         Damageable dmg = col.GetComponent<Damageable>();
         if (dmg != null && (col.GetComponent<ElementType>().type != gameObject.GetComponent<ElementType>().type))
         {
@@ -52,7 +51,7 @@ public class Projectile : MonoBehaviourPun
         if(photonView.IsMine)
         {
             GetComponent<Renderer>().enabled = false;
-            Invoke("InvokedDestroy", 0.3f);
+            Invoke("InvokedDestroy", 0.2f);
         }
     }
 

@@ -11,12 +11,15 @@ public class PlayerControl : MonoBehaviourPun
     public float maxEnergy = 100.0f;
     public float energyRegain = 1f;
     public float energyDepletion = 2f;
+    private float currentSpeed;
+    private float currentEnergy;
 
-    [Header("Shooting")]
+    [Header("Attack")]
     public string projectilePrefabName;
     public Transform projectileLocation;
     public float projectileSpeed;
     public float shootDelay = 0.0f;
+    private float currentShootTime = 0.0f;
 
     [Header("Health")]
     public float maxHealth = 100.0f;
@@ -33,10 +36,6 @@ public class PlayerControl : MonoBehaviourPun
     private Rigidbody2D projectileRb;
     private CameraFollow camF;
     private GameManager gm;
-
-    private float currentShootTime = 0.0f;
-    private float currentEnergy;
-    private float currentSpeed;
     private GameObject tower;
 
     void Start()
@@ -45,7 +44,7 @@ public class PlayerControl : MonoBehaviourPun
         rb = GetComponent<Rigidbody2D>();
         camF = GetComponent<CameraFollow>();
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        
+
         // Variables
         currentHealth = maxHealth;
         currentEnergy = maxEnergy;
@@ -122,7 +121,7 @@ public class PlayerControl : MonoBehaviourPun
     {
         if(projectilePrefabName != "" && projectileLocation != null)
         {
-            GameObject projectile = PhotonNetwork.Instantiate($"Prefabs/{projectilePrefabName}", projectileLocation.position, projectileLocation.rotation);
+            GameObject projectile = PhotonNetwork.Instantiate($"Prefabs/Projectiles/{projectilePrefabName}", projectileLocation.position, projectileLocation.rotation);
             Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
             projectileRb.AddForce(projectileLocation.up * projectileSpeed, ForceMode2D.Impulse);
         }
