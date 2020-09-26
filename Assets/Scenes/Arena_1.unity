@@ -1793,7 +1793,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1926,6 +1926,18 @@ PrefabInstance:
       propertyPath: respawnText
       value: 
       objectReference: {fileID: 439165080}
+    - target: {fileID: 8021880844791051698, guid: ba7b08749a4054d47a575260720be381, type: 3}
+      propertyPath: georges.Array.data[2]
+      value: Fire_George
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021880844791051698, guid: ba7b08749a4054d47a575260720be381, type: 3}
+      propertyPath: georges.Array.data[0]
+      value: Mountain_George
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021880844791051698, guid: ba7b08749a4054d47a575260720be381, type: 3}
+      propertyPath: countdownTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8021880844791051699, guid: ba7b08749a4054d47a575260720be381, type: 3}
       propertyPath: m_LocalPosition.x
       value: 163.02568

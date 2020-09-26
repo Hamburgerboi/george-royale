@@ -124,7 +124,7 @@ MonoBehaviour:
   destroyTime: 100.8
   speedDecay: 0
   speedIncrease: 0
-  damage: 100
+  damage: 600
 --- !u!68 &1166308562388210688
 EdgeCollider2D:
   m_ObjectHideFlags: 0

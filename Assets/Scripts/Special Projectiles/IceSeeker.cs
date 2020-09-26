@@ -59,18 +59,12 @@ public class IceSeeker : MonoBehaviourPun
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Damageable dmg = col.GetComponent<Damageable>();
-        if (dmg != null && (col.GetComponent<ElementType>().type != gameObject.GetComponent<ElementType>().type))
-        {
-            Debug.Log("HIT");
-            dmg.Damage(projectileDamage);
-        }
+        if(col.gameObject.layer == 9 || !photonView.IsMine) return;
 
-        if(photonView.IsMine)
-        {
-            GetComponent<Renderer>().enabled = false;
-            Invoke("InvokedDestroy", 0.2f);
-        }
+        PhotonView pView = PhotonView.Get(this);
+        pView.RPC("RPCDamage", RpcTarget.All, col.gameObject.GetComponent<PhotonView>().ViewID);
+
+        if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
     }
 
     void OnDrawGizmos()
@@ -79,8 +73,16 @@ public class IceSeeker : MonoBehaviourPun
         Gizmos.DrawWireSphere(transform.position, seekingRadius);
     }
     
-    private void InvokedDestroy()
+    [PunRPC]
+    private void RPCDamage(int ID)
     {
-        PhotonNetwork.Destroy(gameObject);
+        PhotonView view = PhotonView.Find(ID);
+        Damageable dmg = view.gameObject.GetComponent<Damageable>();
+        if (dmg != null && (view.gameObject.GetComponent<ElementType>().type != GetComponent<ElementType>().type))
+        {
+            Debug.Log("HIT");
+
+            dmg.Damage(projectileDamage);
+        }
     }
 }
