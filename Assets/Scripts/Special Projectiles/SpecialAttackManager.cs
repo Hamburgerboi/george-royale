@@ -15,17 +15,22 @@ public class SpecialAttackManager : MonoBehaviourPun
     private float speCurrentRechargeTime;
     private SpecialAttackManager SPEAttackManager;
     private Action SPEAttackAction;
+    private ElementType eType;
 
-    //Rock only
-    private float rockAttackTime = -1;
+    [Header("Electric Only")]
+    public float LightningTime = 10f;
+
+    private float currentLightningTimer;
 
     void Start()
     {
         if(!photonView.IsMine) return;
 
-        ElementType eTypes = GetComponent<ElementType>();
+        speCurrentRechargeTime = speRechargeTime;
 
-        switch(eTypes.type)
+        eType = GetComponent<ElementType>();
+
+        switch(eType.type)
         {
             case ElementType.Types.Fire:
                 SPEAttackAction = FireSPEAttack;
@@ -34,7 +39,7 @@ public class SpecialAttackManager : MonoBehaviourPun
                 SPEAttackAction = IceSPEAttack;
                 break;
             case ElementType.Types.Electric:
-                Debug.Log("ELECTTRICCCCCC");
+                SPEAttackAction = SetElectricTimer;
                 break;
             case ElementType.Types.Rock:
                 SPEAttackAction = RockSPEAttack;
@@ -49,7 +54,22 @@ public class SpecialAttackManager : MonoBehaviourPun
     void Update()
     {
         if(!photonView.IsMine) return;
-        if(Input.GetButtonDown("Fire2")) {
+
+        if(speCurrentRechargeTime >= 85)
+        {
+            if(eType.type == ElementType.Types.Electric && currentLightningTimer > 0)
+            {
+                if(Input.GetButton("Fire2"))
+                {
+                    ElectricSPEAttack();
+                    currentLightningTimer -= Time.deltaTime;
+                }
+                return;
+            }
+
+            speCurrentRechargeTime -= Time.deltaTime;
+        } else if(Input.GetButton("Fire2")) {
+            speCurrentRechargeTime = speRechargeTime;
             SPEAttackAction();
         }
     }
@@ -58,7 +78,7 @@ public class SpecialAttackManager : MonoBehaviourPun
     {
         GameObject Phoenix = PhotonNetwork.Instantiate($"Prefabs/Projectiles/SPEProjectiles/{speProjectileName}", (transform.up.normalized * 2) + transform.position, transform.rotation);
         Rigidbody2D PhoenixRb = Phoenix.GetComponent<Rigidbody2D>();
-        PhoenixRb.AddForce(transform.up * 7, ForceMode2D.Impulse);
+        PhoenixRb.AddForce(transform.up * 10, ForceMode2D.Impulse);
     }
 
     private void IceSPEAttack()
@@ -68,6 +88,22 @@ public class SpecialAttackManager : MonoBehaviourPun
             GameObject SPEProjectile = PhotonNetwork.Instantiate($"Prefabs/Projectiles/SPEProjectiles/{speProjectileName}", item.position, item.rotation);
             Rigidbody2D SPEProjectileRb = SPEProjectile.GetComponent<Rigidbody2D>();
             SPEProjectileRb.AddForce(item.up * 16, ForceMode2D.Impulse);   
+        }
+    }
+
+    private void SetElectricTimer()
+    {
+        currentLightningTimer = LightningTime;
+    }
+
+    private void ElectricSPEAttack()
+    {
+        if(UnityEngine.Random.value > 0.77)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            GameObject SPEProjectile = PhotonNetwork.Instantiate($"Prefabs/Projectiles/SPEProjectiles/{speProjectileName}",
+            mousePos + (Vector3)(UnityEngine.Random.insideUnitCircle * 1.5f),
+            Quaternion.Euler(0.0f, 0.0f, UnityEngine.Random.Range(0.0f, 360.0f)));
         }
     }
 
@@ -90,11 +126,10 @@ public class SpecialAttackManager : MonoBehaviourPun
         GameObject SPEProjectile3 = PhotonNetwork.Instantiate($"Prefabs/Projectiles/SPEProjectiles/Grass_Blade/{speProjectileName}_{random + 1}", SPEProjectileLocation[2].position, SPEProjectileLocation[2].rotation);
         SPEProjectile3.GetComponent<Rigidbody2D>().velocity = SPEProjectile3.transform.right * 240;
     }
-}
 
-/*
-        if(speRechargeTime >= 89)
-        {
-            speCurrentRechargeTime -= Time.deltaTime;
-        } else 
-        */
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.75f);
+    }
+}

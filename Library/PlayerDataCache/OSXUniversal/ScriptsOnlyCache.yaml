@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - GrassBlade
     - IceSeeker
     - Launcher
+    - Lightning
     - Phoenix
     - PlayerControl
     - PlayerNameInputField
@@ -94,15 +95,15 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11778}
+      Script: {instanceID: 11776}
     - Class: 114
-      Script: {instanceID: 11876}
+      Script: {instanceID: 11874}
     - Class: 114
-      Script: {instanceID: 12112}
+      Script: {instanceID: 12110}
     - Class: 114
-      Script: {instanceID: 12168}
+      Script: {instanceID: 12166}
     - Class: 114
-      Script: {instanceID: 12584}
+      Script: {instanceID: 12582}
     - Class: 114
       Script: {instanceID: 12924}
     - Class: 114
@@ -179,21 +180,23 @@ ScriptsOnlyBuild:
     - Class: 109
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11778}
+      Script: {instanceID: 11776}
     - Class: 114
-      Script: {instanceID: 11844}
+      Script: {instanceID: 11842}
     - Class: 114
-      Script: {instanceID: 11876}
+      Script: {instanceID: 11874}
     - Class: 114
-      Script: {instanceID: 11928}
+      Script: {instanceID: 11926}
     - Class: 114
-      Script: {instanceID: 12112}
+      Script: {instanceID: 12110}
     - Class: 114
-      Script: {instanceID: 12168}
+      Script: {instanceID: 12166}
     - Class: 114
-      Script: {instanceID: 12408}
+      Script: {instanceID: 12406}
     - Class: 114
-      Script: {instanceID: 12584}
+      Script: {instanceID: 12582}
+    - Class: 114
+      Script: {instanceID: 12618}
     - Class: 114
       Script: {instanceID: 12630}
     - Class: 114
@@ -517,6 +520,12 @@ ScriptsOnlyBuild:
     className: Damageable
   - hash:
       serializedVersion: 2
+      Hash: ff88aefb86f5de794e39a85259b79bbe
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Lightning
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -547,7 +556,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 35879401702ee75827b4bd1dabc46e29
+      Hash: 7404bd185adbd57056f35678e1fb87c8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SpecialAttackManager

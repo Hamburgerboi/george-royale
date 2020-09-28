@@ -12,8 +12,6 @@ public class GrassBlade : MonoBehaviourPun
     private Renderer rend;
     private Rigidbody2D rb;
 
-    private float finalDestroy = 0f;
-
     void Start()
     {
         rend = GetComponent<Renderer>();
@@ -42,13 +40,13 @@ public class GrassBlade : MonoBehaviourPun
     [PunRPC]
     private void RPCDamage(int ID)
     {
-        PhotonView view = PhotonView.Find(ID);
-        Damageable dmg = view.gameObject.GetComponent<Damageable>();
-        if (dmg != null && (view.gameObject.GetComponent<ElementType>().type != GetComponent<ElementType>().type))
+        try
         {
-            Debug.Log("HIT");
-
-            dmg.Damage(damage);
+            PhotonView view = PhotonView.Find(ID);
+            Damageable dmg = view.gameObject.GetComponent<Damageable>();
+            if (dmg != null && (view.gameObject.GetComponent<ElementType>().type != GetComponent<ElementType>().type)) dmg.Damage(damage);
+        }catch (System.Exception e){
+            Debug.Log(e.ToString());
         }
     }
 }

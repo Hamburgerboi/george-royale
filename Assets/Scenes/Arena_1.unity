@@ -1928,15 +1928,23 @@ PrefabInstance:
       objectReference: {fileID: 439165080}
     - target: {fileID: 8021880844791051698, guid: ba7b08749a4054d47a575260720be381, type: 3}
       propertyPath: georges.Array.data[2]
-      value: Fire_George
+      value: Mountain_George
       objectReference: {fileID: 0}
     - target: {fileID: 8021880844791051698, guid: ba7b08749a4054d47a575260720be381, type: 3}
       propertyPath: georges.Array.data[0]
-      value: Mountain_George
+      value: Fire_George
       objectReference: {fileID: 0}
     - target: {fileID: 8021880844791051698, guid: ba7b08749a4054d47a575260720be381, type: 3}
       propertyPath: countdownTime
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021880844791051698, guid: ba7b08749a4054d47a575260720be381, type: 3}
+      propertyPath: georges.Array.data[3]
+      value: Ice_George
+      objectReference: {fileID: 0}
+    - target: {fileID: 8021880844791051698, guid: ba7b08749a4054d47a575260720be381, type: 3}
+      propertyPath: georges.Array.data[1]
+      value: Electric_George
       objectReference: {fileID: 0}
     - target: {fileID: 8021880844791051699, guid: ba7b08749a4054d47a575260720be381, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3445,7 +3453,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   observableSearch: 2
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 2020150439}

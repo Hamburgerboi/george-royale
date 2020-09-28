@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102455597906963799}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7, z: 0}
+  m_LocalPosition: {x: 0, y: 18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4257435437907253915}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523539428333735991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4257435437907253915}
@@ -182,9 +182,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPosition: {fileID: 791278029336952097}
   aimPosition: {fileID: 7277733665143343442}
-  shootSpeed: 18
-  shootOffset: 1.8
-  shootDelay: 0.25
+  shootSpeed: 26
+  shootOffset: 2
+  shootDelay: 0.14
 --- !u!50 &1823339570900222432
 Rigidbody2D:
   serializedVersion: 4

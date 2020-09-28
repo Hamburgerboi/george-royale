@@ -32,6 +32,7 @@ public class Tower : MonoBehaviourPun
             Vector3 pos = Random.insideUnitCircle * shakeMultiplier;
             transform.position += pos;
             currentShakeTime -= Time.deltaTime;
+            Debug.Log("SHAKED");
         }
     }
 

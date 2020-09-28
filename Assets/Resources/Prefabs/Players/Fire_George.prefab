@@ -294,3 +294,4 @@ MonoBehaviour:
   speProjectileName: Phoenix
   speRechargeTime: 90
   SPEProjectileLocation: []
+  LightningTime: 0

@@ -66,23 +66,23 @@ public class IceSeeker : MonoBehaviourPun
 
         if(photonView.IsMine) PhotonNetwork.Destroy(gameObject);
     }
+    
+    [PunRPC]
+    private void RPCDamage(int ID)
+    {
+        try
+        {
+            PhotonView view = PhotonView.Find(ID);
+            Damageable dmg = view.gameObject.GetComponent<Damageable>();
+            if (dmg != null && (view.gameObject.GetComponent<ElementType>().type != GetComponent<ElementType>().type)) dmg.Damage(projectileDamage);
+        }catch (System.Exception e){
+            Debug.Log(e.ToString());
+        }
+    }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, seekingRadius);
-    }
-    
-    [PunRPC]
-    private void RPCDamage(int ID)
-    {
-        PhotonView view = PhotonView.Find(ID);
-        Damageable dmg = view.gameObject.GetComponent<Damageable>();
-        if (dmg != null && (view.gameObject.GetComponent<ElementType>().type != GetComponent<ElementType>().type))
-        {
-            Debug.Log("HIT");
-
-            dmg.Damage(projectileDamage);
-        }
     }
 }
